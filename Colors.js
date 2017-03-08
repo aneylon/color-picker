@@ -29,8 +29,9 @@ function randomNumber(max){
   return Math.floor((Math.random() * max) + 1)
 }
 
-function makeSwatches(){
-  var num = Number(document.getElementById('numberOfColors').value)
+function makeSwatches(num){
+  num = num || Number(document.getElementById('numberOfColors').value)
+  // var num = Number(document.getElementById('numberOfColors').value)
   // clear swatches
   var root = document.getElementById('colors')
   root.innerHTML = ''
@@ -52,4 +53,5 @@ function init() {
   document.getElementById('myForm').addEventListener('submit', function(event){
     event.preventDefault()
   })
+  makeSwatches(3)
 }
