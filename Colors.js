@@ -1,9 +1,26 @@
 function makeRandomColor(){
-  var newColor = makeColor(randomNumber(),randomNumber(),randomNumber())
-  return newColor
+  var red = randomNumber()
+  var green = randomNumber()
+  var blue = randomNumber()
+  var rgbString = makeRGBString(red, green, blue)
+  var hexString = makeHexString(red, green, blue)
+  return {
+    rgbString,
+    hexString
+  }
 }
 
-function makeColor(red, green, blue){
+function makeHexString(red, green, blue){
+  return Array.prototype.reduce.call(arguments, (acc, cur) => {
+    tmp = cur.toString(16)
+
+    if(tmp.length == 1) tmp = '0' + tmp
+
+    return acc + tmp
+  }, '#')
+}
+
+function makeRGBString(red, green, blue){
   return `rgb(${red}, ${green}, ${blue})`
 }
 
@@ -21,9 +38,18 @@ function makeSwatches(){
   for(var i = 0; i < num; i++){
     var newSwatch = document.createElement('div')
     // set swatch color
-    newSwatch.style.backgroundColor = makeRandomColor()
+    var randomColor = makeRandomColor()
+    newSwatch.style.backgroundColor = randomColor.rgbString
+    newSwatch.innerHTML = `<p>${randomColor.hexString}</p>`
+    console.log(randomColor.hexString)
     newSwatch.setAttribute('class', 'colorBlock')
     root.appendChild(newSwatch)
 
   }
+}
+
+function init() {
+  document.getElementById('myForm').addEventListener('submit', function(event){
+    event.preventDefault()
+  })
 }
