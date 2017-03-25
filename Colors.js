@@ -2,9 +2,12 @@ function makeRandomColor(){
   var red = randomNumber()
   var green = randomNumber()
   var blue = randomNumber()
+  var rgbPlain = `${red},${green},${blue}`
   var rgbString = makeRGBString(red, green, blue)
   var hexString = makeHexString(red, green, blue)
+  hexString = hexString.toUpperCase()
   return {
+    rgbPlain,
     rgbString,
     hexString
   }
@@ -31,7 +34,10 @@ function randomNumber(max){
 
 function makeSwatches(num){
   num = num || Number(document.getElementById('numberOfColors').value)
-  // var num = Number(document.getElementById('numberOfColors').value)
+  if(num < 1) {
+    num = 3
+    document.getElementById('numberOfColors').value = ''
+  }
   // clear swatches
   var root = document.getElementById('colors')
   root.innerHTML = ''
@@ -41,11 +47,15 @@ function makeSwatches(num){
     // set swatch color
     var randomColor = makeRandomColor()
     newSwatch.style.backgroundColor = randomColor.rgbString
-    newSwatch.innerHTML = `<p>${randomColor.hexString}</p>`
-    console.log(randomColor.hexString)
+    newSwatch.innerHTML = `<div>
+      <p>${randomColor.hexString}</p>
+      <p>${randomColor.rgbPlain}</p>
+    </div>
+    `
     newSwatch.setAttribute('class', 'colorBlock')
+    newSwatch.setAttribute('onmouseover', 'swatchHover(this)')
+    newSwatch.setAttribute('onmouseout', 'swatchOut(this)')
     root.appendChild(newSwatch)
-
   }
 }
 
@@ -53,5 +63,13 @@ function init() {
   document.getElementById('myForm').addEventListener('submit', function(event){
     event.preventDefault()
   })
-  makeSwatches(3)
+  makeSwatches()
+}
+
+function swatchHover(el){
+  el.firstChild.style.visibility = 'visible'
+}
+
+function swatchOut(el){
+  el.firstChild.style.visibility = 'hidden'
 }
