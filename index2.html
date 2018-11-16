@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Color Scheme Generator</title>
+  <link rel="stylesheet" href="Colors.css">
+</head>
+<body>
+  <div id="colorApp">
+    <h1>{{title}}</h1>
+    <color-swatch
+      v-for="swatch in swatches"
+      v-bind:color="swatch.color"
+      v-bind:key="swatch.id"
+    >
+    </color-swatch>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+  <script src="vueColors.js"></script>
+  <a href="index.html">version 1</a>
+</body>
+</html>
