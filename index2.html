@@ -10,6 +10,10 @@
 <body>
   <div id="colorApp">
     <h1>{{title}}</h1>
+    <form action="">
+      <input v-model="numberOfColors">
+      <button v-on:click="generateColor">do it!</button>
+    </form>
     <color-swatch
       v-for="swatch in swatches"
       v-bind:color="swatch.color"
