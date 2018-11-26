@@ -71,3 +71,12 @@ button:hover {
   /*visibility: hidden;*/
   font-weight: bolder;
 }
+
+.bigSwatch {
+  width: 100px;
+  height: 100px;
+}
+.smallSwatch {
+  width: 50px;
+  height: 50px;
+}
