@@ -1,15 +1,13 @@
 console.log('vue colors')
 
 Vue.component('color-swatch', {
-  props: ['color', 'compliment'],
-  template: `<li>
-    <div class="colorSwatch" v-bind:style="{backgroundColor: color}">
-    {{color}}
-      <div class="complimentSwatch" v-bind:style="{backgroundColor: compliment}">
-        {{compliment}}
-      </div>
+  props: ['colorInfo'],
+  template: `<div>
+  {{ colorInfo.message }}
+    <div class="bigSwatch" v-bind:style="{backgroundColor: colorInfo.styleOne}">{{ colorInfo.styleOne }}
+      <div class="smallSwatch" v-bind:style="{backgroundColor: colorInfo.styleTwo}">{{ colorInfo.styleTwo }}</div>
     </div>
-  </li>`
+  </div>`
 })
 
 var app = new Vue({
@@ -18,12 +16,9 @@ var app = new Vue({
     title: 'Random Color Scheme Generator',
     numberOfColors: 3,
     swatches:[
-      { id: 0, color: '#123456', compliment: '#abcdef'},
-      {
-        id: 1,
-        color: 'hsl(123, 100%, 50%)',
-        compliment: 'hsl(303, 100%, 50%)'
-      }
+      { id:0, message: 'One', styleOne: 'red', styleTwo: 'green'},
+      { id:1, message: 'Two', styleOne: 'blue', styleTwo: 'orange'},
+      { id:2, message: 'Three', styleOne: 'yellow', styleTwo: 'purple'}
     ]
   },
   methods: {
