@@ -1,11 +1,11 @@
 console.log('vue colors')
 
 Vue.component('color-swatch', {
-  props: ['colorInfo'],
+  props: ['socolor'],
   template: `<div>
-  {{ colorInfo.message }}
-    <div class="bigSwatch" v-bind:style="{backgroundColor: colorInfo.styleOne}">{{ colorInfo.styleOne }}
-      <div class="smallSwatch" v-bind:style="{backgroundColor: colorInfo.styleTwo}">{{ colorInfo.styleTwo }}</div>
+  {{ socolor.message }}
+    <div class="bigSwatch" v-bind:style="{backgroundColor: socolor.styleOne}">{{ socolor.styleOne }}
+      <div class="smallSwatch" v-bind:style="{backgroundColor: socolor.styleTwo}">{{ socolor.styleTwo }}</div>
     </div>
   </div>`
 })
