@@ -19,21 +19,20 @@ var app = new Vue({
   },
   methods: {
     generateColor: function() {
-      console.log('make a new color!')
       this.swatches = []
       for(let i = 0; i < this.numberOfColors; i++) {
         let newNum = this.randomHSLNumber()
-        console.log(newNum)
         let newSwatch = this.createNewSwatch(newNum, i)
-        console.log(newSwatch)
         this.swatches.push(newSwatch)
       }
     },
     randomHSLNumber: function() {
-      return Math.random() * 360
+      return this.randomNumber(360)
+    },
+    randomNumber: function(max) {
+      return Math.floor(Math.random() * max)
     },
     createNewSwatch: function(hslNumber, id) {
-      console.log('making new swatch with hsl#:', hslNumber)
       return { id, primaryColor: this.hslColorString(hslNumber), secondaryColor: this.hslColorComplimentString(hslNumber)}
     },
     hslColorString: function (hslNumber) {
@@ -47,7 +46,6 @@ var app = new Vue({
     }
   },
   created: function() {
-    console.log('Start me up!')
     this.generateColor()
   }
 })
