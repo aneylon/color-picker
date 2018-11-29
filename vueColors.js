@@ -26,6 +26,9 @@ var app = new Vue({
         this.swatches.push(newSwatch)
       }
     },
+    randomRGBNumber: function(){
+      return `rgb(${this.randomNumber(255)}, ${this.randomNumber(255)}, ${this.randomNumber(255)})`
+    }
     randomHSLNumber: function() {
       return this.randomNumber(360)
     },
