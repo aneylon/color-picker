@@ -28,7 +28,7 @@ var app = new Vue({
     },
     randomRGBNumber: function(){
       return `rgb(${this.randomNumber(255)}, ${this.randomNumber(255)}, ${this.randomNumber(255)})`
-    }
+    },
     randomHSLNumber: function() {
       return this.randomNumber(360)
     },
@@ -39,7 +39,7 @@ var app = new Vue({
       return { id, primaryColor: this.hslColorString(hslNumber), secondaryColor: this.hslColorComplimentString(hslNumber)}
     },
     hslColorString: function (hslNumber) {
-      return `hsl(${hslNumber}, 100%, 50%)`
+      return `hsl(${hslNumber}, ${this.randomHSLNumber(100)}%, ${this.randomNumber(100)}%)`
     },
     hslColorComplimentString: function (hslNumber) {
       if(hslNumber > 180)
