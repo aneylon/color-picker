@@ -21,9 +21,9 @@ var app = new Vue({
     generateColor: function() {
       this.swatches = []
       for(let i = 0; i < this.numberOfColors; i++) {
-        // let newNum = this.randomHSLNumber()
-        // let newSwatch = this.createNewSwatch(newNum, i)
-        let newSwatch = this.createRGBSwatch(i)
+        let newNum = this.randomHSLNumber()
+        let newSwatch = this.createNewSwatch(newNum, i)
+        // let newSwatch = this.createRGBSwatch(i)
         this.swatches.push(newSwatch)
       }
     },
@@ -47,10 +47,12 @@ var app = new Vue({
       return `hsl(${hslNumber}, ${this.randomHSLNumber(100)}%, ${this.randomNumber(100)}%)`
     },
     hslColorComplimentString: function (hslNumber) {
+      let saturation = this.randomNumber(100)
+      let value = this.randomNumber(100)
       if(hslNumber > 180)
-        return `hsl(${hslNumber - 180}, 100%, 50%)`
+        return `hsl(${hslNumber - 180}, ${saturation}%, ${value}%)`
       else
-        return `hsl(${hslNumber + 180}, 100%, 50%)`
+        return `hsl(${hslNumber + 180}, ${saturation}%, ${value}%)`
     },
     createRGBSwatch: function (id) {
       let numbers = {
