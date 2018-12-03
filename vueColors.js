@@ -14,45 +14,44 @@ var app = new Vue({
   el: '#colorApp',
   data: {
     title: 'Random Color Scheme Generator',
-    numberOfColors: 3,
+    numberOfColors: 2,
     swatches:[]
   },
   methods: {
     generateColor: function() {
       this.swatches = []
       for(let i = 0; i < this.numberOfColors; i++) {
-        let newNum = this.randomHSLNumber()
-        let newSwatch = this.createNewSwatch(newNum, i)
-        // let newSwatch = this.createRGBSwatch(i)
-        this.swatches.push(newSwatch)
+        let newSwatchHSL = this.createHslSwatch(`HSL${i}`)
+        let newSwatchRGB = this.createRGBSwatch(`RGB${i}`)
+        this.swatches.push(newSwatchHSL)
+        this.swatches.push(newSwatchRGB)
+      }
+    },
+    createHslSwatch: function(id) {
+      let hue = this.randomNumber(360)
+      let saturation = this.randomNumber(100)
+      let lightness = this.randomNumber(100)
+
+      return {
+        id,
+        primaryColor: this.hslColorString(hue, saturation, lightness),
+        secondaryColor: this.hslColorComplimentString(hue, saturation, lightness)
       }
     },
     randomRGBNumber: function(){
       return `rgb(${this.randomNumber(255)}, ${this.randomNumber(255)}, ${this.randomNumber(255)})`
     },
-    randomHSLNumber: function() {
-      return this.randomNumber(360)
-    },
     randomNumber: function(max) {
       return Math.floor(Math.random() * max)
     },
-    createNewSwatch: function(hslNumber, id) {
-      return {
-        id,
-        primaryColor: this.hslColorString(hslNumber),
-        secondaryColor: this.hslColorComplimentString(hslNumber)
-      }
+    hslColorString: function (hue, saturation, lightness) {
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`
     },
-    hslColorString: function (hslNumber) {
-      return `hsl(${hslNumber}, ${this.randomHSLNumber(100)}%, ${this.randomNumber(100)}%)`
-    },
-    hslColorComplimentString: function (hslNumber) {
-      let saturation = this.randomNumber(100)
-      let value = this.randomNumber(100)
-      if(hslNumber > 180)
-        return `hsl(${hslNumber - 180}, ${saturation}%, ${value}%)`
+    hslColorComplimentString: function (hue, saturation, lightness) {
+      if(hue > 180)
+        return `hsl(${hue - 180}, ${saturation}%, ${lightness}%)`
       else
-        return `hsl(${hslNumber + 180}, ${saturation}%, ${value}%)`
+        return `hsl(${hue + 180}, ${saturation}%, ${lightness}%)`
     },
     createRGBSwatch: function (id) {
       let numbers = {
@@ -70,16 +69,13 @@ var app = new Vue({
       return `rgb(${numbers.red},${numbers.green},${numbers.blue})`
     },
     createRGBCompliment: function (numbers) {
-      console.log(numbers)
       for(number in numbers) {
-        console.log(number, numbers[number])
         let compliment = numbers[number] + 127
         if(compliment > 255) {
           compliment -= 255
         }
         numbers[number] = compliment
       }
-      console.log(numbers)
       return `rgb(${numbers.red},${numbers.green},${numbers.blue})`
     }
   },
